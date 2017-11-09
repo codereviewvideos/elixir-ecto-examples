@@ -6,11 +6,13 @@ defmodule EctoExamples.Application do
   use Application
 
   def start(_type, _args) do
+    import Supervisor.Spec
+
     # List all child processes to be supervised
     children = [
       # Starts a worker by calling: EctoExamples.Worker.start_link(arg)
       # {EctoExamples.Worker, arg},
-      {EctoExamples.Repo, []}
+      supervisor(EctoExamples.Repo, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
